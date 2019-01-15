@@ -112,7 +112,7 @@ class ListOfMovies extends Component {
         return newDate;
     };
     fetchData = (dateForFetch, stateToUse) => {
-        fetch(`http://api.tvmaze.com/schedule?country=US&date=${dateForFetch}`)
+        fetch(`https://api.tvmaze.com/schedule?country=US&date=${dateForFetch}`)
             .then(response => response.json())
             .then(data =>{
                 this.setState({[stateToUse]: data});
