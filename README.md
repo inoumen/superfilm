@@ -9,7 +9,7 @@ This project was bootstrapped with Create React App.
 
 Runs the app in the development mode.
 
-Here you can check live-version: https://gerokuapp.testtaskformauris.com
+Here you can check live-version: https://testtaskformauris.herokuapp.com/
 
 All you need to install the app and check it on your own is to
 
