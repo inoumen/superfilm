@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Atami';
+    src: url('Atami-Regular.woff2') format('woff2'),
+        url('Atami-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

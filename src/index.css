@@ -1,0 +1,185 @@
+@font-face {
+  font-family: 'Atami';
+  src: url('./fonts/Atami - Full Font/transfonter/Atami-Regular.woff2') format('woff2'),
+  url('./fonts/Atami - Full Font/transfonter/Atami-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+html,
+body,
+#root,
+.App{
+  height: 100%;
+  margin: 0;
+}
+
+/* App Component Styles */
+.App{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* Header Styles */
+.HeaderComponent{
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  background-image: url("images/backgroundPat.png");
+  font-size: 3.5rem;
+  width: 100%;
+  height: 14rem;
+  line-height: 14rem;
+  border-bottom: 1px solid #e9e9e9;
+}
+.HeaderComponent span{
+  font-family: Atami, sans-serif;
+}
+
+.HeaderComponent img {
+  position: absolute;
+  left: 4rem;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  cursor: pointer;
+  min-height: 2.7rem;
+  min-width: 2.7rem;
+}
+
+/* HelloMessage component styles */
+
+.HelloMessage{
+  display: block;
+  text-align: center;
+  font-size: 2.2rem;
+}
+
+.Calendar{
+  display: block;
+  width: 100vw;
+}
+
+/* ListOfMovies component styles */
+.ListOfMovies{
+  display: block;
+  width: 100%;
+}
+
+.MoviesDateHeader{
+  line-height: 6rem;
+  border-bottom: 1px solid #e9e9e9;
+  height: 6rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 2.5rem;
+}
+
+.MoviesShowTumbler{
+  margin: 4rem;
+}
+.MoviesShowTumbler--wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  font-size: 2.5rem;
+  background-color: transparent;
+  border: 2px solid #d6d6d6;
+  border-radius: 10px;
+  width: 100%;
+  color: #999999;
+  cursor: pointer;
+}
+
+.MoviesShowTumbler--wrapper img{
+  margin-left: 1rem;
+}
+/* MovieCard component styles */
+
+.MovieCard{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.MovieCardImage--wrapper{
+  text-align: center;
+  margin: 4rem;
+}
+
+.MovieCard img{
+  display: inline-block;
+
+  border-radius: 10px;
+  box-shadow: 0 0 50px #cacfc9;
+}
+
+.MovieCardInfoWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  margin-right: 4rem;
+  justify-content: space-between;
+}
+
+.nameYear{
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+
+.nameYear span{
+  display: block;
+  font-size: 2.3rem;
+}
+
+.nameYear span:first-child{
+  font-size: 2.3rem;
+}
+.nameYear span:last-child{
+  color: #b4b4b4;
+  font-weight: 600;
+}
+
+.seasonEpisode{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  align-self: flex-start;
+  padding: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  width: 28rem;
+  margin-right: 1rem;
+}
+
+.seasonEpisode span{
+  margin: 1rem;
+  font-size: 1.8rem;
+  color: #999999;
+  font-weight: 600;
+}
+
+/* Just to make the app not so ugly on desktop */
+@media screen and (min-width: 1378px) {
+  .DayPicker-Day{
+    width: 14vw!important;
+    height: 1vh!important;
+    padding: 20px!important;
+  }
+}
