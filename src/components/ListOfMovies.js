@@ -21,8 +21,8 @@ class ListOfMovies extends Component {
                             (child.show.image &&
                                 <MovieCard
                                     key={child.id}
-                                    mediumImage={child.show.image.medium}
-                                    originalImage={child.show.image.original}
+                                       mediumImage={this.typeRightUrl(child.show.image.medium)}
+                                       originalImage={this.typeRightUrl(child.show.image.original)}
                                     allInfo={child}
                                 />
                             )
@@ -48,8 +48,8 @@ class ListOfMovies extends Component {
                                     i < 4 &&
                                         (child.show.image && <MovieCard
                                                 key={child.id}
-                                                mediumImage={child.show.image.medium}
-                                                originalImage={child.show.image.original}
+                                                mediumImage={this.typeRightUrl(child.show.image.medium)}
+                                                originalImage={this.typeRightUrl(child.show.image.original)}
                                                 allInfo={child}
                                         />
                                         )
@@ -111,6 +111,7 @@ class ListOfMovies extends Component {
         newDate = newDate.split("").splice(0, newDate.length-3).join("");
         return newDate;
     };
+    typeRightUrl = url => "https" + url.split("").splice(4, url.length-1).join("");
     fetchData = (dateForFetch, stateToUse) => {
         fetch(`https://api.tvmaze.com/schedule?country=US&date=${dateForFetch}`)
             .then(response => response.json())
