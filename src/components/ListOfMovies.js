@@ -40,7 +40,7 @@ class ListOfMovies extends Component {
 
 
                 <div className="nextDateMovies">
-                    {!this.state.showMain ?
+                    {!this.state.showMain &&
                         <div>
                             <div className="MoviesDateHeader">{this.ordinaryDate(this.plusOneDay(this.props.date))}</div>
                             <div>
@@ -56,7 +56,7 @@ class ListOfMovies extends Component {
                                     )
                                 }
                             </div>
-                        </div> : ""
+                        </div>
                     }
                     <div className="MoviesShowTumbler" onClick={this.showMain}>
                         <div className="MoviesShowTumbler--wrapper">
