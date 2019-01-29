@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./spinner.css";
 import MovieCard from './MovieCard';
 import navUp from '../images/navUp.png';
 import navDown from '../images/navDown.png';
@@ -9,65 +10,78 @@ class ListOfMovies extends Component {
         dataPlusOnaDayFromApi: null,
         showMore: false,
         showMain: false,
+        showSpinner: false,
     };
 
     render() {
         return (
-            <div className="ListOfMovies">
-                <div className="MoviesDateHeader">{this.ordinaryDate(this.props.date)}</div>
-                <div className="thisDateMovies">
-                   {this.state.dataFromApi && this.state.dataFromApi.map( (child, i) =>
-                       (i < 2 || this.state.showMore) &&
+            this.checkDataLoaded() ?
+                <div className="ListOfMovies">
+                    <div className="MoviesDateHeader">{this.ordinaryDate(this.props.date)}</div>
+                    <div className="thisDateMovies">
+                        {this.state.dataFromApi.map( (child, i) =>
+                            (i < 2 || this.state.showMore) &&
                             (child.show.image &&
                                 <MovieCard
                                     key={child.id}
-                                       mediumImage={this.typeRightUrl(child.show.image.medium)}
-                                       originalImage={this.typeRightUrl(child.show.image.original)}
+                                    mediumImage={this.typeRightUrl(child.show.image.medium)}
+                                    originalImage={this.typeRightUrl(child.show.image.original)}
                                     allInfo={child}
                                 />
                             )
                         )
-                   }
-                </div>
-                <div className="MoviesShowTumbler" onClick={this.showMore}>
-                    <div className="MoviesShowTumbler--wrapper">
-                        {this.state.showMore ?
-                            "Свернуть" : `Ещё ${this.state.dataFromApi && this.sayRight(this.state.dataFromApi.length-2)}`
                         }
-                        <img src={navDown} alt="down navigation"/>
                     </div>
-                </div>
+
+                    {this.state.dataFromApi.length > 0 ?
+                    <div className="MoviesShowTumbler" onClick={this.showMore}>
+                        <div className="MoviesShowTumbler--wrapper">
+                            {this.state.showMore ?
+                                "Свернуть" : `Ещё ${this.state.dataFromApi && this.sayRight(this.state.dataFromApi.length-2)}`
+                            }
+                            <img src={navDown} alt="down navigation"/>
+                        </div>
+                    </div> : <div className="noFilms">Пока нет анонсов на этот день</div>}
 
 
-                <div className="nextDateMovies">
-                    {!this.state.showMain &&
+                    <div className="nextDateMovies">
+                        {!this.state.showMain &&
                         <div>
                             <div className="MoviesDateHeader">{this.ordinaryDate(this.plusOneDay(this.props.date))}</div>
                             <div>
-                                {this.state.dataPlusOnaDayFromApi && this.state.dataPlusOnaDayFromApi.map( (child,  i) =>
+                                {this.state.dataPlusOnaDayFromApi.map( (child,  i) =>
                                     i < 4 &&
-                                        (child.show.image && <MovieCard
-                                                key={child.id}
-                                                mediumImage={this.typeRightUrl(child.show.image.medium)}
-                                                originalImage={this.typeRightUrl(child.show.image.original)}
-                                                allInfo={child}
+                                    (child.show.image && <MovieCard
+                                            key={child.id}
+                                            mediumImage={this.typeRightUrl(child.show.image.medium)}
+                                            originalImage={this.typeRightUrl(child.show.image.original)}
+                                            allInfo={child}
                                         />
-                                        )
                                     )
+                                )
                                 }
                             </div>
-                        </div>
-                    }
-                    <div className="MoviesShowTumbler" onClick={this.showMain}>
-                        <div className="MoviesShowTumbler--wrapper">
-                            {this.state.showMain ? "Показать дополнительные" : "Показать основные"}
-                            <img src={navUp} alt="down navigation"/>
-                        </div>
+                        </div>}
+                        {this.state.dataPlusOnaDayFromApi.length > 0 ?
+                            <div className="MoviesShowTumbler" onClick={this.showMain}>
+                                <div className="MoviesShowTumbler--wrapper">
+                                    {this.state.showMain ? "Показать дополнительные" : "Показать основные"}
+                                    <img src={navUp} alt="down navigation"/>
+                                </div>
+                            </div> : <div className="noFilms">Пока нет анонсов на этот день</div>}
                     </div>
+                </div> : this.state.showSpinner && <div className="la-ball-pulse"> {/*Additional spinner state we need to hold on spinner showing*/}
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
-            </div>
         );
     }
+    // ADDITIONAL FUNCTIONS
+    checkDataLoaded = () => this.state.dataFromApi && this.state.dataPlusOnaDayFromApi;
+    runSpinner = () => {
+        this.setState({showSpinner: !this.state.showSpinner});
+    };
     showMain = () => {
         this.setState({showMain: !this.state.showMain});
     };
@@ -80,9 +94,6 @@ class ListOfMovies extends Component {
         return biggerDate.toISOString().substring(0, 10);
     };
     sayRight = (number) => {
-        // I know I could use some library like
-        // https://github.com/ukrbublik/numeralize-rus-ukr#numeralizepluralizecount-forms
-        // but I've decided to write it by myself because it's interesting and I had time.
         const theStringNum = number.toString();
         return `${theStringNum} ${getRightSpelling(
             theStringNum
@@ -117,12 +128,17 @@ class ListOfMovies extends Component {
             .then(response => response.json())
             .then(data =>{
                 this.setState({[stateToUse]: data});
+                console.log(data);
             });
     };
+    //HERE ADDITIONAL FUNCTIONS END
 
     componentDidMount(){
         this.fetchData(this.props.date, "dataFromApi");
         this.fetchData(this.plusOneDay(this.props.date), "dataPlusOnaDayFromApi");
+        setTimeout(() => {
+            this.runSpinner();
+        }, 300)
     }
 
 }

@@ -104,6 +104,12 @@ body,
 .MoviesShowTumbler--wrapper img{
   margin-left: 1rem;
 }
+
+.noFilms{
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 3rem;
+}
 /* MovieCard component styles */
 
 .MovieCard{

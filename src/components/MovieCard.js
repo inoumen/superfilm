@@ -15,7 +15,7 @@ class MovieCard extends Component {
                 </div>
 
                 {!this.state.showOriginal &&
-                    <div className="MovieCardInfoWrapper">
+                <div className="MovieCardInfoWrapper">
                     <div className="nameYear">
                         <span>{this.props.allInfo.show.name}</span>
                         <span>{new Date(this.props.allInfo.show.premiered).getFullYear()}</span>
@@ -34,4 +34,3 @@ class MovieCard extends Component {
 }
 
 export default MovieCard;
-
