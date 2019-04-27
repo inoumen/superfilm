@@ -1,0 +1,9 @@
+node_modules/**/*
+npm-debug.*
+*.jks
+*.p12
+*.key
+*.mobileprovision
+.idea
+.DS_Store
+*.log
